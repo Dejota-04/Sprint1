@@ -1,4 +1,4 @@
-﻿@model Sprint1.Models.Produto
+﻿@model Sprint1.ViewModels.ProdutoCreateViewModel
 
 @{
     ViewData["Title"] = "Cadastrar Novo Produto";
@@ -10,11 +10,11 @@
 
 <div class="row">
     <div class="col-md-8">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
 
             <div class="form-group mb-3">
-                <label asp-for="Imagem_url" class="control-label">URL da Imagem</label>
+                <label asp-for="Imagem_url" class="control-label"></label>
                 <input asp-for="Imagem_url" class="form-control" />
                 <span asp-validation-for="Imagem_url" class="text-danger"></span>
             </div>
@@ -34,8 +34,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">
-                        <label asp-for="Preco_original" class="control-label">Preço Original</label>
-                        <input asp-for="Preco_original" class="form-control" />
+                        <label asp-for="Preco_original" class="control-label"></label>
+                        <input asp-for="Preco_original" class="form-control" type="text" />
                         <span asp-validation-for="Preco_original" class="text-danger"></span>
                     </div>
                 </div>
@@ -51,28 +51,49 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">
-                        <label asp-for="Condicao_produto" class="control-label">Condição</label>
-                        <select asp-for="Condicao_produto" class="form-control">
-                            <option value="">-- Selecione --</option>
-                            <option value="Novo">Novo</option>
-                            <option value="Usado">Usado</option>
-                            <option value="Edição de Colecionador">Edição de Colecionador</option>
+                        <label asp-for="Condicao_produto" class="control-label"></label>
+                        <select asp-for="Condicao_produto" class="form-select" asp-items="ViewBag.Condicoes">
+                            <option value="">-- Selecione a Condição --</option>
                         </select>
                         <span asp-validation-for="Condicao_produto" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group mb-3">
-                        <label asp-for="Categoria" class="control-label"></label>
-                        <input asp-for="Categoria" class="form-control" />
-                        <span asp-validation-for="Categoria" class="text-danger"></span>
+                        <label asp-for="FuncionarioId" class="control-label"></label>
+                        <input asp-for="FuncionarioId" class="form-control" type="number" />
+                        <span asp-validation-for="FuncionarioId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label asp-for="Altura" class="control-label"></label>
+                        <input asp-for="Altura" class="form-control" type="text" />
+                        <span asp-validation-for="Altura" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label asp-for="Largura" class="control-label"></label>
+                        <input asp-for="Largura" class="form-control" type="text" />
+                        <span asp-validation-for="Largura" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label asp-for="Profundidade" class="control-label"></label>
+                        <input asp-for="Profundidade" class="form-control" type="text" />
+                        <span asp-validation-for="Profundidade" class="text-danger"></span>
                     </div>
                 </div>
             </div>
 
             <div class="form-group mt-4">
                 <input type="submit" value="Cadastrar Produto" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-outline-secondary">Voltar para a Lista</a>
+                <a asp-controller="Produtos" asp-action="Index" class="btn btn-outline-secondary">Voltar para a Lista</a>
             </div>
         </form>
     </div>

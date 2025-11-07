@@ -10,43 +10,37 @@
 
     <div class="row mt-4">
         <div class="col-md-4">
-            <img src="@Model.Imagem_url" class="img-fluid rounded shadow-sm" alt="Capa do @Model.Titulo">
+            @if (!string.IsNullOrEmpty(Model.Imagem_url))
+            {
+                <img src="@Model.Imagem_url" class="img-fluid rounded shadow-sm" alt="Capa do @Model.Titulo">
+            }
+            else
+            {
+                <img src="https://via.placeholder.com/600x800.png?text=Sem+Capa" class="img-fluid rounded shadow-sm" alt="Sem Capa">
+            }
         </div>
 
         <div class="col-md-8">
-            <h3>Descrição</h3>
+            <h3>@Html.DisplayNameFor(model => model.Descricao)</h3>
             <p class="lead">@Model.Descricao</p>
 
             <div class="mt-4 mb-4">
-                @if (Model.Preco_descontado.HasValue && Model.Preco_descontado < Model.Preco_original)
-                {
-                    <h4 class="text-muted" style="text-decoration: line-through;">
-                        @Model.Preco_original.ToString("C")
-                    </h4>
-                    <h2 class="text-success">
-                        @Model.Preco_descontado.Value.ToString("C")
-                    </h2>
-                }
-                else
-                {
-                    <h2 class="text-primary">
-                        @Model.Preco_original.ToString("C")
-                    </h2>
-                }
+                <h2 class="text-primary">
+                    @Model.Preco_original.ToString("C")
+                </h2>
             </div>
 
             <hr />
 
             <h4>Especificações</h4>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Estoque:</strong> @Model.Estoque unidades</li>
-                <li class="list-group-item"><strong>Categoria:</strong> @Model.Categoria</li>
-                <li class="list-group-item"><strong>Condição:</strong> @Model.Condicao_produto</li>
-                <li class="list-group-item"><strong>Idioma:</strong> @Model.Idioma</li>
-                @if (!string.IsNullOrEmpty(Model.Dimensoes))
-                {
-                    <li class="list-group-item"><strong>Dimensões:</strong> @Model.Dimensoes</li>
-                }
+                <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Estoque):</strong> @Model.Estoque unidades</li>
+                <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Condicao_produto):</strong> @Model.Condicao_produto</li>
+
+                <li class="list-group-item"><strong>Dimensões (A x L x P):</strong> @Model.Altura cm x @Model.Largura cm x @Model.Profundidade cm</li>
+
+                <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.FuncionarioId):</strong> @Model.FuncionarioId</li>
+
             </ul>
         </div>
     </div>

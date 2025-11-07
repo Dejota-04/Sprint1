@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Sprint1.Models.Produto>
+﻿@model Sprint1.ViewModels.ProdutoIndexViewModel
 
 @{
     ViewData["Title"] = "Gerenciar Produtos";
@@ -14,16 +14,32 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Titulo)
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["TituloSort"]"
+                   asp-route-termoBusca="@Model.FiltroAtual">
+                    Nome
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Preco_original)
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["PrecoSort"]"
+                   asp-route-termoBusca="@Model.FiltroAtual">
+                    Preço
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Estoque)
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["EstoqueSort"]"
+                   asp-route-termoBusca="@Model.FiltroAtual">
+                    Estoque
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Categoria)
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CondicaoSort"]"
+                   asp-route-termoBusca="@Model.FiltroAtual">
+                    Condição
+                </a>
             </th>
             <th>
                 Ações
@@ -31,7 +47,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Produtos)
         {
             <tr>
                 <td>
@@ -44,7 +60,7 @@
                     @Html.DisplayFor(modelItem => item.Estoque)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Categoria)
+                    @Html.DisplayFor(modelItem => item.Condicao_produto)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Produto_ID" class="btn btn-secondary btn-sm">Editar</a>
@@ -61,3 +77,20 @@
         }
     </tbody>
 </table>
+
+<nav>
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.TotalPaginas; i++)
+        {
+            <li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
+                <a asp-action="Index"
+                   asp-route-pagina="@i"
+                   asp-route-sortOrder="@Model.SortOrderAtual"
+                   asp-route-termoBusca="@Model.FiltroAtual"
+                   class="page-link">
+                    @i
+                </a>
+            </li>
+        }
+    </ul>
+</nav>

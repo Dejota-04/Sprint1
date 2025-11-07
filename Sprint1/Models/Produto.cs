@@ -1,52 +1,59 @@
-﻿using System.ComponentModel.DataAnnotations; 
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sprint1.Models
 {
+    [Table("PRODUTOS")]
     public class Produto
     {
-        public int Produto_ID { get; set; }
+        [Key]
+        [Column("ID")]
+        public long Produto_ID { get; set; } 
 
-        [Required(ErrorMessage = "O campo Título é obrigatório.")]
-        [StringLength(150, ErrorMessage = "O título não pode ter mais de 150 caracteres.")]
+
+        [Required]
+        [Column("NOME")]
+        [Display(Name = "Nome")]
         public string Titulo { get; set; }
 
-        [Required(ErrorMessage = "O campo Descrição é obrigatório.")]
+        [Required]
+        [Column("DESCRICAO")]
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
+        [Required]
+        [Column("ENDERECO_IMAGEM")]
         [Display(Name = "URL da Imagem")]
-        public string? Imagem_url { get; set; }
+        public string Imagem_url { get; set; }
 
-        [Required(ErrorMessage = "O campo Preço Original é obrigatório.")]
-        [Column(TypeName = "decimal(10, 2)")]
-        [Display(Name = "Preço Original")]
-        public decimal Preco_original { get; set; }
+        [Required]
+        [Column("PRECO")]
+        [Display(Name = "Preço")]
+        public double Preco_original { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
-        [Display(Name = "Preço com Desconto")]
-        public decimal? Preco_descontado { get; set; }
-
-        [Required(ErrorMessage = "O campo Estoque é obrigatório.")]
-        [Range(0, int.MaxValue, ErrorMessage = "O estoque não pode ser negativo.")]
+        [Required]
+        [Column("ESTOQUE")]
         public int Estoque { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
-        public decimal? Peso { get; set; }
-
-        public string? Dimensoes { get; set; }
-
-        [Required(ErrorMessage = "O campo Condição é obrigatório.")]
+        [Required]
+        [Column("CONDICAO")]
         [Display(Name = "Condição")]
-        public string Condicao_produto { get; set; }
+        public int Condicao_produto { get; set; } 
 
-        [Required(ErrorMessage = "O campo Categoria é obrigatório.")]
-        public string Categoria { get; set; }
+        [Required]
+        [Column("ALTURA")]
+        public float Altura { get; set; }
 
-        public string? Idioma { get; set; }
+        [Required]
+        [Column("LARGURA")]
+        public float Largura { get; set; }
 
-        public decimal Avaliacao_media { get; set; } = 0;
+        [Required]
+        [Column("PROFUNDIDADE")]
+        public float Profundidade { get; set; }
 
-        public int Numero_de_avaliacoes { get; set; } = 0;
+        [Required]
+        [Column("FUNCIONARIO_ID")]
+        public long FuncionarioId { get; set; }
     }
 }
